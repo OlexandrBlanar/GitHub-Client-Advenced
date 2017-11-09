@@ -1,3 +1,8 @@
-<p>
-  user-details-page works!
-</p>
+<img [src]="user.avatar_url" alt="avatar image">
+<ul>
+  <li>User name: {{user.name}}</li>
+  <li>User location: {{user.location}}</li>
+  <li *ngIf="user.bio">User bio: {{user.bio}}</li>
+  <li>Profile creation date: {{user.created_at}}</li>
+  <li><a [href]="user.html_url">GitHub page</a></li>
+</ul>

@@ -1,3 +1,28 @@
-<p>
-  search-users-page works!
-</p>
+<label for="searchText">Enter the username for search</label>
+<input class="form-control" id="searchText" (keyup)="onKey($event)" />
+<button class="btn btn-success" (click)="toggle()">Toggle layot</button>`
+<ng-container *ngIf="condition">
+    <table class="table">
+        <thead>
+            <td>User login</td>
+            <td>Details</td>
+            <td>GitHub page</td>
+        </thead>
+        <tr *ngFor="let user of users | async">
+            <td>{{user.login}}></td>
+            <td><a [href]="" (click)="onSelect(user)">Details</a></td>
+            <td><a [href]="user.html_url" target=”_blank”>GitHub page</a></td>
+        </tr>
+    </table>
+</ng-container>
+<ng-container *ngIf="!condition">
+    <div class="card-columns">
+        <div class="card" *ngFor="let user of users | async">
+            <ul>
+                <li>Login: {{user.login}}</li>
+                <li><a [href]="" (click)="onSelect(user)">Details</a></li>
+                <li><a [href]="user.html_url" target=”_blank”>GitHub page</a></li>
+            </ul>
+        </div>
+    </div>
+</ng-container>

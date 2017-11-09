@@ -1,0 +1,24 @@
+#searchText {
+    max-width: 250px;
+    margin-bottom: 15px;
+}
+
+.card li {
+    list-style: none;
+    padding-top: 20px;
+    padding-bottom: 20; 
+}
+
+.btn {
+    margin-bottom: 25px;
+}
+
+tr td a {
+    cursor: pointer;
+    color: royalblue;
+}
+
+ul li a {
+    cursor: pointer;
+    color: royalblue;
+}

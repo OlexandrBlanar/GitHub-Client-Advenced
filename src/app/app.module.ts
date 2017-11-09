@@ -17,7 +17,6 @@ import { AppRoutingModule } from './app-routing-module';
 import { HomepageComponent } from './homepage/homepage.component';
 import { SearchUsersPageComponent } from './search-users-page/search-users-page.component';
 import { UserDetailsPageComponent } from './user-details-page/user-details-page.component';
-import { LoginComponent } from './auth/login/login.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +24,6 @@ import { LoginComponent } from './auth/login/login.component';
     HomepageComponent,
     SearchUsersPageComponent,
     UserDetailsPageComponent,
-    LoginComponent,
   ],
   imports: [
     AppRoutingModule,

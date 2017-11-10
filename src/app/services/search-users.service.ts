@@ -21,7 +21,6 @@ export class SearchUsersService {
                 params: new HttpParams().set('q', searchQuery).set('per_page', '10')
             })
             .map(data => {
-                console.log(this.extractProducts(data));
                 this.users = this.extractProducts(data);
                 return this.users;
                 },

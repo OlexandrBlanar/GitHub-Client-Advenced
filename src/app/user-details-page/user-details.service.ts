@@ -18,7 +18,6 @@ export class UserDetailService {
         return this.http
             .get(newUrl)
             .map(data => {
-                console.log(data);
                 this.user = data;
                 return this.user;
                 },

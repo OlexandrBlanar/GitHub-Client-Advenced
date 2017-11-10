@@ -7,15 +7,13 @@ export class AuthGuard implements CanActivate {
 
     constructor(public authService: AuthService ) {}
 
-    user: any;
-    anyError: any;
+    isUser: boolean;
 
     canActivate(): boolean {
         this.authService.user.subscribe(
-            data => this.user = data,
-            err => this.anyError
+            data => {if(data) this.isUser = true;},
+            err => console.log(err)
         )
-        console.log((this.user));
-        return !!this.user;
+        return this.isUser;
     }
 }

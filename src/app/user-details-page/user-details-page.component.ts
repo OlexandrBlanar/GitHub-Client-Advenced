@@ -16,12 +16,11 @@ export class UserDetailsPageComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.forEach((params: Params) => {
-      let login = params["login"];
+      const login = params["login"];
       this.service
           .getUser(login)
           .subscribe(result => this.user = result);  
     });
-    console.log(this.user);
   }
 
 }

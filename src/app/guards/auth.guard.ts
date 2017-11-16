@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { AuthService } from './../services/auth.service';
 import { Injectable } from "@angular/core";
 import { CanActivate } from "@angular/router";
@@ -7,13 +8,9 @@ export class AuthGuard implements CanActivate {
 
     constructor(public authService: AuthService ) {}
 
-    isUser: boolean;
+    canActivate(): Observable<boolean> | boolean {
 
-    canActivate(): boolean {
-        this.authService.user.subscribe(
-            data => {if(data) this.isUser = true;},
-            err => console.log(err)
-        )
-        return this.isUser;
+        return this.authService.user.map((user) => !!user);
+
     }
 }

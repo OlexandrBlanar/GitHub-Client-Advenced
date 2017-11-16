@@ -1,3 +1,12 @@
 .navbar {
     margin-bottom: 25px;
 }
+
+.nav-item h1 {
+    font-size: 16px;
+    color: white;
+}
+
+.nav-item img {
+    position: absolute;
+}

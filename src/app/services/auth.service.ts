@@ -9,7 +9,7 @@ import * as firebase from 'firebase/app';
 export class AuthService {
 
   public user: Observable<firebase.User>;
-  
+
   constructor(private firebaseAuth: AngularFireAuth) {
     this.user = firebaseAuth.authState;
   }
@@ -22,8 +22,8 @@ export class AuthService {
         console.log('Success!', value);
       })
       .catch(err => {
-        console.log('Something went wrong:',err.message);
-      });    
+        console.log('Something went wrong:', err.message);
+      });
   }
 
   login(email: string, password: string) {
@@ -34,7 +34,7 @@ export class AuthService {
         console.log('Nice, it worked!');
       })
       .catch(err => {
-        console.log('Something went wrong:',err.message);
+        console.log('Something went wrong:', err.message);
       });
   }
 

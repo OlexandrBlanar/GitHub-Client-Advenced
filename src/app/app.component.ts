@@ -9,9 +9,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   
-  title: string = 'GitHub Client Advanced';
+  public title: string = 'GitHub Client Advanced';
+  public user: any;
 
-  constructor(public authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {
+    this.user = authService.user;  
+  }
 
   login() {
     this.router.navigate(["login"]);

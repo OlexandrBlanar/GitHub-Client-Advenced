@@ -14,10 +14,24 @@ import { LoginComponent } from './auth/login/login.component';
             redirectTo: "home",
             pathMatch: "full"
         },
-        { path: "home", component: HomepageComponent},
-        { path: "search", component: SearchUsersPageComponent, canActivate: [AuthGuard]},
-        { path: "user/:login", component: UserDetailsPageComponent, canActivate: [AuthGuard]},
-        { path: "login", component: LoginComponent}
+        {
+            path: "home",
+            component: HomepageComponent
+        },
+        {
+            path: "search",
+            component: SearchUsersPageComponent,
+            canActivate: [AuthGuard]
+        },
+        {
+            path: "user/:login",
+            component: UserDetailsPageComponent,
+            canActivate: [AuthGuard]
+        },
+        {
+            path: "login",
+            component: LoginComponent
+        }
     ])],
     exports: [RouterModule]
 })

@@ -15,10 +15,15 @@
 
 tr td a {
     cursor: pointer;
-    color: royalblue;
+    color: #2A59E4;
 }
 
 ul li a {
     cursor: pointer;
     color: royalblue;
+}
+
+.table thead {
+    background-color: #CAD1DF;;
+    font-weight: bold;
 }

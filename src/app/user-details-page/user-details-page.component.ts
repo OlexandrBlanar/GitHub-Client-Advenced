@@ -2,6 +2,8 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { UserDetailService } from './user-details.service';
 import { Component, OnInit } from '@angular/core';
 
+import 'rxjs/add/operator/catch';
+
 @Component({
   selector: 'app-user-details-page',
   templateUrl: './user-details-page.component.html',
@@ -9,18 +11,21 @@ import { Component, OnInit } from '@angular/core';
   providers: [UserDetailService]
 })
 export class UserDetailsPageComponent implements OnInit {
-  
-  user: any;
 
-  constructor(private service: UserDetailService, private activatedRoute: ActivatedRoute) { }
+  public user: any;
+
+  constructor(
+    private userDetailService: UserDetailService,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit() {
-    this.activatedRoute.params.forEach((params: Params) => {
-      const login = params["login"];
-      this.service
-          .getUser(login)
-          .subscribe(result => this.user = result);  
-    });
+
+    const login: string = this.activatedRoute.snapshot.params['login'];
+
+    this.userDetailService
+      .getUser(login)
+      .subscribe(result => { this.user = result })
   }
 
 }

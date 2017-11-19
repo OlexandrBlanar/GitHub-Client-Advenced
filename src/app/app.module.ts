@@ -2,13 +2,14 @@ import { AuthGuard } from './guards/auth.guard';
 import { SearchUsersService } from './services/search-users.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule }   from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthModule } from './auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from './environments/environment';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { FormsModule }   from '@angular/forms';
+import { ReactiveFormsModule }   from '@angular/forms';
 
 import { AuthService } from './services/auth.service';
 
@@ -28,6 +29,7 @@ import { UserDetailsPageComponent } from './user-details-page/user-details-page.
   imports: [
     AppRoutingModule,
     BrowserModule,
+    ReactiveFormsModule,
     FormsModule,
     AuthModule,
     AngularFireModule.initializeApp(environment.firebase),

@@ -2,90 +2,97 @@ import { Observable } from 'rxjs/Observable';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 
 import * as firebase from 'firebase/app';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css']
 })
 
 export class LoginComponent implements OnInit {
-  
-  public email: string;
-  public password: string;
-  public user: Observable<firebase.User>;
-  public authForm: FormGroup;
 
-  private formErrors = {
-    "email": "",
-    "password": "",
-   };
+    public email: string;
+    public password: string;
+    public user: Observable<firebase.User>;
+    public authForm: FormGroup;
 
-  private validationMessages = {
-      "email": {
-          "required": "Обязательное поле.",
-          "email": "Введен неправильный email",
-      },
-      "password": {
-          "required": "Обязательное поле.",
-          "minlength": "Значение должно быть не менее 5 символов.",
-      },
-  };
+    private formErrors = {
+        "email": "",
+        "password": "",
+    };
 
-  constructor(private authService: AuthService, private fb: FormBuilder) {
-    this.user = authService.user;
-  }
+    private validationMessages = {
+        "email": {
+            "required": "Обязательное поле.",
+            "email": "Введен неправильный email",
+        },
+        "password": {
+            "required": "Обязательное поле.",
+            "minlength": "Значение должно быть не менее 5 символов.",
+        },
+    };
 
-  ngOnInit() {
-    this.buildForm();
-  }
+    constructor(
+        private authService: AuthService,
+        private fb: FormBuilder
+    ) {
+        this.user = authService.user;
+    }
 
-  buildForm() {
-      this.authForm = this.fb.group({
-          "email": [this.email, [
-              Validators.required,
-              Validators.email,
-          ]],
-          "password": [this.password, [
-              Validators.required,
-              Validators.minLength(5),
-          ]],
-      });
+    ngOnInit() {
+        this.buildForm();
+    }
 
-      this.authForm.valueChanges
-          .subscribe(data => this.onValueChange(data));
+    buildForm() {
+        this.authForm = this.fb.group({
+            "email": [this.email, [
+                Validators.required,
+                Validators.email,
+            ]],
+            "password": [this.password, [
+                Validators.required,
+                Validators.minLength(5),
+            ]],
+        });
 
-      this.onValueChange();
-  }
+        this.authForm.valueChanges
+            .subscribe(data => this.onValueChange(data));
 
-  onValueChange(data?: any) {
-      if (!this.authForm) return;
+        this.onValueChange();
+    }
 
-      for (let field in this.formErrors) {
-          this.formErrors[field] = "";
+    onValueChange(data?: any) {
+        if (!this.authForm) return;
 
-          const control = this.authForm.get(field);
+        for (let field in this.formErrors) {
+            this.formErrors[field] = "";
 
-          if (control && control.dirty && !control.valid) {
-              let message = this.validationMessages[field];
-              for (let key in control.errors) {
-                  this.formErrors[field] += message[key] + " ";
-              }
-          }
-      }
-  }
+            const control = this.authForm.get(field);
 
-  signup() {
-    this.authService.signup(this.email, this.password);
-    this.email = this.password = '';
-  }
+            if (control && control.dirty && !control.valid) {
+                let message = this.validationMessages[field];
+                for (let key in control.errors) {
+                    this.formErrors[field] += message[key] + " ";
+                }
+            }
+        }
+    }
 
-  login() {
-    this.authService.login(this.email, this.password);
-    this.email = this.password = '';    
-  }
+    signup() {
+        const email = this.authForm.get("email");
+        const password = this.authForm.get("password");
+
+        this.authService.signup(email.value, password.value);
+    }
+
+    login() {
+        const email = this.authForm.get("email");
+        const password = this.authForm.get("password");
+
+        this.authService.login(email.value, password.value);
+    }
 
 }
